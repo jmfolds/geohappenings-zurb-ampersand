@@ -1,0 +1,6 @@
+{
+  "name": "geohappenings-zurb-ampersand",
+  "dependencies": {
+    "foundation": "zurb/bower-foundation"
+  }
+}
