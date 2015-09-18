@@ -1,2 +1,5 @@
+var test = require('./test');
+
 $(document).foundation();
-console.log('Hey!');
+
+test.test('This is only a test.');

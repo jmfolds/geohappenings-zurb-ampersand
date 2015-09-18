@@ -1,15 +1,44 @@
 'use strict';
 
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    connect = require('gulp-connect'),
-    paths = {
-        scripts: [],
-        sass: ['./scss/**/*.scss']
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var connect = require('gulp-connect');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var source = require('vinyl-source-stream');
+var _ = require('lodash');
+var gutil = require('gulp-util');
+
+function bundle (watch) {
+    var inputs = ['./js/app.js'];
+    var outputLocation = './js/';
+    
+    var customOpts = {
+        entries: inputs,
+        insertGlobals: true
     };
- 
+
+    var opts = _.assign({}, watchify.args, customOpts);
+    var b = watchify(browserify(opts));
+
+    if (watch) {
+        b.on('update', bundle); // on any dep update, runs the bundler
+    }
+
+    b.bundle()
+    .on("error", function(err) {
+        gutil.log(
+            gutil.colors.red("Browserify compile error:"), 
+            err.message
+        );
+        this.emit("end");
+    })
+    .pipe(source('app.bundle.js'))
+    .pipe(gulp.dest(outputLocation));
+};
+
+// compile sass
 gulp.task('sass', function () {
-    console.log('test');
     gulp.src(['./scss/**/*.scss'])
         .pipe(sass({
             includePaths: ['bower_components/foundation/scss']
@@ -17,24 +46,26 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./css'))
         .pipe(connect.reload());
 });
- 
 
-
-gulp.task('sass:watch', function () {
-    gulp.watch(['./scss/**/*.scss', './index.html'], ['sass', 'html']);
-    // gulp.watch('./index.html', function () {
-    //     console.log('testing....');
-    //     connect.reload();
-    // });
-});
-
-gulp.task('serve', ['sass:watch'], function() {
-    connect.server({
-        livereload: true
-    });
-});
-
+// reload when html updates
 gulp.task('html', function() {
   gulp.src('./*.html')
     .pipe(connect.reload());
+});
+
+// reload when sass updates
+gulp.task('watch', function () {
+    gulp.watch([
+        './scss/**/*.scss',
+        './js/**/*.js',
+        './index.html'
+        ], ['sass', 'html']);
+    bundle(true);
+});
+
+// serve at localhost:8080, start 
+gulp.task('serve', ['watch'], function() {
+    connect.server({
+        livereload: true
+    });
 });
