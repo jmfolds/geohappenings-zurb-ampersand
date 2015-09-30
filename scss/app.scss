@@ -1,12 +1,13 @@
 @import "settings";
 @import "foundation";
+@import "map";
 
-#map {
-	position: absolute;
-	top: 45px;
-	bottom: 0;
-	width: 100%;
-	background-color: gray;
+.top-bar-section .icon {
+    font-size: 24px;
+    text-align: center;
+    position: relative;
+    top: 5px;
+    margin-right: 8px;
 }
 
 // Or selectively include components

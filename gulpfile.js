@@ -6,16 +6,21 @@ var connect = require('gulp-connect');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
+// var buffer = require('vinyl-buffer');
+// var uglify = require('gulp-uglify');
+// var sourcemaps = require('gulp-sourcemaps');
 var _ = require('lodash');
 var gutil = require('gulp-util');
+var hbs = require('browserify-handlebars');
 
 function bundle (watch) {
-    var inputs = ['./js/app.js'];
+    var inputs = './js/app.js';
     var outputLocation = './js/';
     
     var customOpts = {
         entries: inputs,
-        insertGlobals: true
+        transform: [hbs],
+        debug: true
     };
 
     var opts = _.assign({}, watchify.args, customOpts);
@@ -26,16 +31,21 @@ function bundle (watch) {
     }
 
     b.bundle()
-    .on("error", function(err) {
+    .on('error', function(err) {
         gutil.log(
-            gutil.colors.red("Browserify compile error:"), 
+            gutil.colors.red('Browserify compile error:'), 
             err.message
         );
-        this.emit("end");
+        this.emit('end');
     })
-    .pipe(source('app.bundle.js'))
+    .pipe(source('./build/app.bundle.js'))
+    // .pipe(buffer())
+    // .pipe(sourcemaps.init({loadMaps: true}))
+    //     .pipe(uglify())
+    //     .on('error', gutil.log)
+    // .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(outputLocation));
-};
+}
 
 // compile sass
 gulp.task('sass', function () {
