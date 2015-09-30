@@ -10,6 +10,7 @@ module.exports = AmpersandView.extend({
 	initialize: function () {
 		this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
 		this.dataSet.on('value', _.bind(this.getMessages, this));
+		this.listenTo(app.router, 'message:showFeature', this.closeModal);
 	},
 
  	template: require('../../templates/list.hbs')(),
@@ -41,6 +42,10 @@ module.exports = AmpersandView.extend({
 			if (a.timeStamp < b.timeStamp) { return 1; } return 0;
 		});
 		this.collection.add(this.messages);
+	},
+
+	closeModal: function () {
+		$(this.el).foundation('reveal', 'close');
 	},
 
 	remove: function () {

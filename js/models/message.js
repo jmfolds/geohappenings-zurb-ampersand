@@ -3,10 +3,11 @@ var AmpersandModel = require('ampersand-model');
 
 module.exports = AmpersandModel.extend({
     props: {
-        id: 'any',
         text: ['string', true, ''],
         name: ['string', true, ''],
-        timeStamp: 'number'
+        timeStamp: 'number',
+        lat: 'float',
+        lon: 'float'
     },
     derived: {
     	timeAgo: {
