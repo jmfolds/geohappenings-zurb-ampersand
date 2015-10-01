@@ -1,6 +1,7 @@
 {
   "name": "geohappenings-zurb-ampersand",
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "foundation": "zurb/bower-foundation",
+    "typeahead.js": "~0.11.1"
   }
 }

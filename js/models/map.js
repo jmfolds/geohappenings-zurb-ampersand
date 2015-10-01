@@ -63,7 +63,8 @@ var MapModel = AmpersandModel.extend({
         if (selectedFtr && zoomTo) {
             var lat = selectedFtr.feature.geometry.coordinates[1];
             var lng = selectedFtr.feature.geometry.coordinates[0];
-            this.map.setView([lat, lng], 10);
+            var zoom = this.map.getZoom() > 8 ? this.map.getZoom(): 8;
+            this.map.setView([lat, lng], zoom);
         }
         return selectedFtr;
     },

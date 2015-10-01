@@ -6,6 +6,7 @@ var connect = require('gulp-connect');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
+var debowerify = require('debowerify');
 // var buffer = require('vinyl-buffer');
 // var uglify = require('gulp-uglify');
 // var sourcemaps = require('gulp-sourcemaps');
@@ -19,13 +20,12 @@ function bundle (watch) {
     
     var customOpts = {
         entries: inputs,
-        transform: [hbs],
+        transform: [hbs, debowerify],
         debug: true
     };
 
     var opts = _.assign({}, watchify.args, customOpts);
     var b = watchify(browserify(opts));
-
     if (watch) {
         b.on('update', bundle); // on any dep update, runs the bundler
     }

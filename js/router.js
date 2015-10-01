@@ -27,7 +27,9 @@ module.exports = Router.extend({
     this.trigger('page', new SearchView());
   },
   share: function () {
-    this.trigger('page', new ShareView());
+    this.trigger('page', new ShareView({
+      model: new Message()
+    }));
   },
   about: function () {
     this.trigger('page', new AboutView());

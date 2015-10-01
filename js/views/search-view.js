@@ -1,10 +1,10 @@
 /* global app*/
 'use strict';
 var SearchView = require('ampersand-view');
+var typeahead = require('typeahead.js');
 
 module.exports = SearchView.extend({
 	initialize: function () {
-	
 	},
 
  	template: require('../../templates/search.hbs')(),
