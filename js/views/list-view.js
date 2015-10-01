@@ -10,7 +10,7 @@ module.exports = AmpersandView.extend({
 	initialize: function () {
 		this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
 		this.dataSet.on('value', _.bind(this.getMessages, this));
-		this.listenTo(app.router, 'message:showFeature', this.closeModal);
+		this.listenTo(app.router, 'message:listClick', this.closeModal);
 	},
 
  	template: require('../../templates/list.hbs')(),

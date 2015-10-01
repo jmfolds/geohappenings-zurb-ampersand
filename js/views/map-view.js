@@ -1,11 +1,9 @@
-/* global app */
 'use strict';
 var MapView = require('ampersand-view');
-var MapModel = require('../models/map-model');
+var MapModel = require('../models/map');
 
 module.exports = MapView.extend({
 	initialize: function () {
-
 		this.model = new MapModel();
 	},
 
