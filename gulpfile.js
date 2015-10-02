@@ -51,7 +51,7 @@ function bundle (watch) {
 gulp.task('sass', function () {
     gulp.src(['./scss/**/*.scss'])
         .pipe(sass({
-            includePaths: ['bower_components/foundation/scss']
+            includePaths: ['bower_components/foundation/scss','bower_components/leaflet/dist/css']
         }).on('error', sass.logError))
         .pipe(gulp.dest('./build/css'))
         .pipe(connect.reload());
