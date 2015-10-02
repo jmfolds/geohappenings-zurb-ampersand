@@ -1,4 +1,4 @@
-/* global app, L*/
+/* global L*/
 'use strict';
 
 var Firebase = require('firebase');
@@ -9,7 +9,6 @@ var PopupTemplate = require('../../templates/popup.hbs');
 
 var MapModel = AmpersandModel.extend({
     initialize: function () {
-        this.listenTo(app.router, 'message:listClick', this.onListSelect);
         this.popupTemplate = PopupTemplate;
         this.popup = L.popup();
         this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
@@ -22,7 +21,7 @@ var MapModel = AmpersandModel.extend({
         this.map.setView(L.latLng([39.060800, -25.503862]), 3);
         //add basemap
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            minZoom: 1,
+            minZoom: 2,
             maxZoom: 18,
             attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
         }).addTo(this.map);
@@ -38,10 +37,6 @@ var MapModel = AmpersandModel.extend({
             // clear selection when popup closes
             this.updateSelection();
         }, this));
-    },
-
-    onListSelect: function (attrs) {
-        this.updateSelection(attrs, true);
     },
 
     updateSelection: function (attrs, zoomTo) {
@@ -65,12 +60,24 @@ var MapModel = AmpersandModel.extend({
             var lng = selectedFtr.feature.geometry.coordinates[0];
             var zoom = this.map.getZoom() > 8 ? this.map.getZoom(): 8;
             this.map.setView([lat, lng], zoom);
+            this.openPopup(selectedFtr);
+
         }
         return selectedFtr;
     },
 
+    initMapClick: function (data) {
+        this.map.on('click', _.bind(function (evt) {
+            this.map.off('click');
+            data.view.render();
+            data.callback(evt.latlng, data.data);
+        }, this));
+    },
+
     getMessages: function (dataSnapshot) {
         this.messages = [];
+        this.msgLayer.clearLayers();
+        this.map.closePopup();
         // parse users/messages and add to geojsonLayer
         //https://www.firebase.com/docs/web/api/datasnapshot/
         dataSnapshot.forEach(_.bind(function (user) {
@@ -91,15 +98,18 @@ var MapModel = AmpersandModel.extend({
         return (tE > 60) ? Math.floor((tE * 60) / 3600)  + ' hours ago' :  tE + ' minutes ago';
     },
 
+    openPopup: function (ftr) {
+        // send ftr props to popupTemplate to get HTML string
+        var html = this.popupTemplate(ftr.feature.properties);
+        // set the popup's location and html content
+        this.popup.setLatLng(ftr.getLatLng()).setContent(html);
+        this.map.openPopup(this.popup);
+        this.updateSelection(ftr.feature.properties);
+    },
+
     onEachFeature: function (ftr, layer) {
         layer.on('click', _.bind(function (evt) {
-            // send ftr props to popupTemplate to get HTML string
-            var html = this.popupTemplate(evt.target.feature.properties);
-            // set the popup's location and html content
-            this.popup.setLatLng(evt.target.getLatLng()).setContent(html);
-            this.map.openPopup(this.popup);
-            //highlight, without zooming
-            this.updateSelection(evt.target.feature.properties);
+            this.openPopup(evt.target);
         }, this));
     },
 

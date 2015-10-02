@@ -37,14 +37,8 @@ module.exports = AmpersandView.extend({
     
     handleLinkClick: function (e) {
         var aTag = e.target;
-        var local = aTag.host === window.location.host;
-
-        // if it's a plain click (no modifier keys)
-        // and it's a local url, navigate internally
-        if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
-            e.preventDefault();
-            app.navigate(aTag.pathname);
-        }
+        e.preventDefault();
+        app.navigate(aTag.pathname);
     },
 
     handleNewPage: function (view) {

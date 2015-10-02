@@ -12,7 +12,7 @@ module.exports = AboutView.extend({
 	render: function () {
 	    this.renderWithTemplate();
 	    $(this.el).foundation('reveal', 'open');
-	    $(this.el).on('closed.fndtn.reveal', function () {
+	    $(this.el).on('close.fndtn.reveal', function () {
 	    	app.navigate('/map');
 	    	this.remove();
 	    });

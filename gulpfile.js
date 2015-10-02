@@ -16,7 +16,7 @@ var hbs = require('browserify-handlebars');
 
 function bundle (watch) {
     var inputs = './js/app.js';
-    var outputLocation = './js/';
+    var outputLocation = './build/js/';
     
     var customOpts = {
         entries: inputs,
@@ -38,7 +38,7 @@ function bundle (watch) {
         );
         this.emit('end');
     })
-    .pipe(source('./build/app.bundle.js'))
+    .pipe(source('./app.bundle.js'))
     // .pipe(buffer())
     // .pipe(sourcemaps.init({loadMaps: true}))
     //     .pipe(uglify())
@@ -53,7 +53,7 @@ gulp.task('sass', function () {
         .pipe(sass({
             includePaths: ['bower_components/foundation/scss']
         }).on('error', sass.logError))
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest('./build/css'))
         .pipe(connect.reload());
 });
 

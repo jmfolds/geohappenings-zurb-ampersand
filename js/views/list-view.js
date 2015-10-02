@@ -20,7 +20,7 @@ module.exports = AmpersandView.extend({
 	    // open modal
 	    $(this.el).foundation('reveal', 'open');
 	    // set listener to navigate and destroy on modal close
-	    $(this.el).on('closed.fndtn.reveal', function () {
+	    $(this.el).on('close.fndtn.reveal', function () {
 	    	app.navigate('/map');
 	    	this.remove();
 	    });
