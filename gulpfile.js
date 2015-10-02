@@ -7,6 +7,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var debowerify = require('debowerify');
+var concat = require('gulp-concat');
 // var buffer = require('vinyl-buffer');
 // var uglify = require('gulp-uglify');
 // var sourcemaps = require('gulp-sourcemaps');
@@ -46,15 +47,23 @@ function bundle (watch) {
     // .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(outputLocation));
 }
-
+gulp.task('scripts', function() {
+  return gulp.src(['./lib/file3.js', './lib/file1.js', './lib/file2.js'])
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('./dist/'));
+});
 // compile sass
 gulp.task('sass', function () {
     gulp.src(['./scss/**/*.scss'])
         .pipe(sass({
-            includePaths: ['bower_components/foundation/scss','bower_components/leaflet/dist/css']
+            includePaths: ['bower_components/foundation/scss']
         }).on('error', sass.logError))
         .pipe(gulp.dest('./build/css'))
         .pipe(connect.reload());
+        //hack to include leaflet.css and not include bower_components in github for github pages
+    gulp.src(['./build/css/app.css', 'bower_components/leaflet/dist/leaflet.css'])
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest('./build/css'));
 });
 
 // reload when html updates
