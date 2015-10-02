@@ -1,6 +1,6 @@
 /*global app*/
 'use strict';
-
+var $ = require('jquery');
 var AmpersandView = require('ampersand-view');
 var ViewSwitcher = require('ampersand-view-switcher');
 

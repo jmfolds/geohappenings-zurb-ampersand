@@ -32,6 +32,7 @@
     "ampersand-view": "^8.0.1",
     "ampersand-view-switcher": "^2.0.0",
     "domready": "^1.0.8",
-    "firebase": "^2.3.0"
+    "firebase": "^2.3.0",
+    "jquery": "^2.1.4"
   }
 }

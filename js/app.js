@@ -1,4 +1,7 @@
+/* global $, L */
 'use strict';
+var $ = require('jquery');
+var L = require('leaflet');
 
 var Router = require('./router');
 var NavView = require('./views/nav-view');
