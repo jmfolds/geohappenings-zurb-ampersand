@@ -36,6 +36,7 @@ module.exports = AmpersandView.extend({
     },
     
     handleLinkClick: function (e) {
+        $('.top-bar').removeClass('expanded');
         var aTag = e.target;
         e.preventDefault();
         app.navigate(aTag.pathname);

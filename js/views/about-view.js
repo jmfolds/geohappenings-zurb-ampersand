@@ -6,7 +6,9 @@ var AboutView = require('ampersand-view');
 
 module.exports = AboutView.extend({
 	initialize: function () {
-	
+        this.listenTo(app.router, 'modal:hide', function () {
+		    $(this.el).foundation('reveal', 'close');
+        }, this);
 	},
 
  	template: require('../../templates/about.hbs')(),

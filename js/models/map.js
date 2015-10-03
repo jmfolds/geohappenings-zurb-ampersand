@@ -1,9 +1,9 @@
-/* global L*/
 'use strict';
 
 var Firebase = require('firebase');
 var AmpersandModel = require('ampersand-model');
 var _ = require('lodash');
+var L = require('leaflet');
 var PopupTemplate = require('../../templates/popup.hbs');
 
 

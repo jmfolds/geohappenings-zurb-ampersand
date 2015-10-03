@@ -11,6 +11,9 @@ module.exports = SearchView.extend({
 	initialize: function () {
         this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
         // this.dataSet.on('value', _.bind(this.getMessages, this));
+        this.listenTo(app.router, 'modal:hide', function () {
+		    $(this.el).foundation('reveal', 'close');
+        }, this);
 	},
 
  	template: require('../../templates/search.hbs')(),

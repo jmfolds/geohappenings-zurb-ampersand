@@ -4,6 +4,11 @@
 @import "map";
 @import "typeahead";
 
+.top-bar-section,
+.top-bar-section .left {
+	z-index: 9999; //show above map
+}
+
 .top-bar-section .icon {
     font-size: 24px;
     text-align: center;

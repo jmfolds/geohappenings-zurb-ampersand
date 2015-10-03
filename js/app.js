@@ -1,8 +1,6 @@
-/* global $, L */
 'use strict';
 var $ = require('jquery');
-var L = require('leaflet');
-var foundation = require('foundation');
+require('foundation');
 
 var Router = require('./router');
 var NavView = require('./views/nav-view');
@@ -20,7 +18,6 @@ module.exports = {
     // wait for document ready to render our main views
     // this ensures the document has a body, etc.
     domReady(function () {
-      // $(document).foundation();
       // init our nav view
       var navView = self.view = new NavView({
         el: $('#nav')[0]
@@ -33,6 +30,8 @@ module.exports = {
       // ...and render
       navView.render();
       mapView.render();
+
+      $(document).foundation();
 
       // we have what we need, we can now start our router and show the appropriate page
       self.router.history.start({pushState: false, root: '/'});

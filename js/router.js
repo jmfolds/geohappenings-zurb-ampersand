@@ -10,10 +10,12 @@ var Message = require('./models/message');
 
 module.exports = Router.extend({
   routes: {
+    '': 'map',
     'list': 'list',
     'search': 'search',
     'share': 'share',
-    'about': 'about'
+    'about': 'about',
+    'map': 'map'
   },
 
   // ------- ROUTE HANDLERS ---------
@@ -33,5 +35,8 @@ module.exports = Router.extend({
   },
   about: function () {
     this.trigger('page', new AboutView());
+  },
+  map: function () {
+    this.trigger('modal:hide');
   }
 });

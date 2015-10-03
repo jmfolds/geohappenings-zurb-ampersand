@@ -6435,6 +6435,10 @@ th.hide-for-touch {
 .twitter-typeahead input {
   background-color: #fff !important; }
 
+.top-bar-section,
+.top-bar-section .left {
+  z-index: 9999; }
+
 .top-bar-section .icon {
   font-size: 24px;
   text-align: center;

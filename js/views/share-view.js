@@ -9,6 +9,9 @@ var Firebase = require('firebase');
 module.exports = AmpersandView.extend({
 	initialize: function () {
 		this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
+        this.listenTo(app.router, 'modal:hide', function () {
+		    $(this.el).foundation('reveal', 'close');
+        }, this);
 	},
  	template: require('../../templates/share.hbs')(),
 
