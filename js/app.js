@@ -2,6 +2,7 @@
 'use strict';
 var $ = require('jquery');
 var L = require('leaflet');
+var foundation = require('foundation');
 
 var Router = require('./router');
 var NavView = require('./views/nav-view');
@@ -19,6 +20,7 @@ module.exports = {
     // wait for document ready to render our main views
     // this ensures the document has a body, etc.
     domReady(function () {
+      // $(document).foundation();
       // init our nav view
       var navView = self.view = new NavView({
         el: $('#nav')[0]

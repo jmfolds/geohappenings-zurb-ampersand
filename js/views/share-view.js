@@ -1,5 +1,7 @@
 /* global app*/
 'use strict';
+var $ = require('jquery');
+
 var AmpersandView = require('ampersand-view');
 var _ = require('lodash');
 var Firebase = require('firebase');

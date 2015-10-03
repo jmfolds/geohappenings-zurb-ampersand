@@ -1,8 +1,10 @@
 /* global app*/
 'use strict';
+var $ = require('jquery');
+
 var SearchView = require('ampersand-view');
 //todo: why is this undefined? debowerify seems to be working as expected
-var typeahead = require('typeahead.js');
+// var typeahead = require('typeahead.js');
 module.exports = SearchView.extend({
 	initialize: function () {
 	},

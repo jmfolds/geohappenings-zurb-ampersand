@@ -1,5 +1,7 @@
 /* global app*/
 'use strict';
+var $ = require('jquery');
+
 var AboutView = require('ampersand-view');
 
 module.exports = AboutView.extend({
