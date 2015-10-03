@@ -36,7 +36,8 @@
     "domready": "^1.0.8",
     "firebase": "^2.3.0",
     "foundation-sites": "^5.5.2",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "leaflet": "^0.7.5"
   },
   "browser": {
     "jquery": "./node_modules/jquery/dist/jquery.js",

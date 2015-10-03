@@ -1,6 +1,4 @@
-# Geohappenings - Zurb Foundation wih &.js
-
-Coming soon.
+# Geohappenings - Zurb Foundation with Ampersand.js
 
 ## Requirements
 
@@ -12,5 +10,15 @@ Coming soon.
 
 ```bash
 git clone git@github.com:jmfolds/geohappenings-zurb-ampersand.git
+
+cd geohappenings-zurb-ampersand
+
 npm install && bower install
+
+gulp serve --> builds and starts dev server at localhost:8080 and watches for files changes to rebuild
+
 ```
+
+###TODO:###
+  * Get typeahead working with browserify
+  * remove bower completely?

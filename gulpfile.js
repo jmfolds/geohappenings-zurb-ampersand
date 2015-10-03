@@ -31,7 +31,7 @@ function bundle (watch) {
         b.on('update', bundle); // on any dep update, runs the bundler
     }
 
-    b.bundle()
+    return b.bundle()
     .on('error', function(err) {
         gutil.log(
             gutil.colors.red('Browserify compile error:'), 
@@ -56,7 +56,7 @@ gulp.task('sass', function () {
         }).on('error', sass.logError))
         .pipe(gulp.dest('./build/css'))
         .pipe(connect.reload());
-    //hack to include leaflet.css and not include bower_components in github for github pages
+    //hack to include leaflet.css
     gulp.src(['./build/css/app.css', 'node_modules/leaflet/dist/leaflet.css'])
         .pipe(concat('all.css'))
         .pipe(gulp.dest('./build/css'));
@@ -78,8 +78,13 @@ gulp.task('watch', function () {
     bundle(true);
 });
 
+gulp.task('build', ['sass'], function() {
+    bundle();
+    return;
+});
+
 // serve at localhost:8080, start 
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', ['build', 'watch'], function() {
     connect.server({
         livereload: true
     });
