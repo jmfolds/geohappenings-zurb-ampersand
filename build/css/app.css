@@ -6340,7 +6340,8 @@ th.hide-for-touch {
 .modal-view {
   border-radius: 4px;
   max-height: 100%;
-  bottom: 50px;
+  bottom: 15px;
+  top: 65px;
   overflow: hidden;
   max-width: 600px; }
 

@@ -12,5 +12,9 @@ Coming soon.
 
 ```bash
 git clone git@github.com:jmfolds/geohappenings-zurb-ampersand.git
+
+cd geohappenings-zurb-ampersand
+
 npm install && bower install
+
 ```
