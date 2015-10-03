@@ -6373,6 +6373,68 @@ th.hide-for-touch {
   width: 100%;
   padding: 0; }
 
+/*TYPEAHEAD*/
+.typeahead,
+.tt-query,
+.tt-hint {
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  outline: none; }
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+.tt-hint {
+  color: #999; }
+
+.tt-menu {
+  text-align: left;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  top: 22px !important; }
+
+.tt-suggestion {
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  padding: 5px; }
+
+.tt-suggestion.tt-cursor,
+.tt-suggestion.tt-cursor:hover {
+  background-color: #43AC6A;
+  color: #fff; }
+
+.tt-suggestion:hover {
+  color: #fff;
+  background-color: #0054a4; }
+
+.tt-suggestion p {
+  margin: 0; }
+
+.twitter-typeahead {
+  display: block !important;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px; }
+
+.twitter-typeahead input {
+  background-color: #fff !important; }
+
 .top-bar-section .icon {
   font-size: 24px;
   text-align: center;

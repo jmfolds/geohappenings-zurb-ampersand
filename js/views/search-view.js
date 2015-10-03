@@ -1,12 +1,16 @@
 /* global app*/
 'use strict';
 var $ = require('jquery');
+var _ = require('lodash');
+var Firebase = require('firebase');
+//todo: cannot import typeahead, tried using debowerify to no avail
+// cheating by including the library in the index page for now
 
 var SearchView = require('ampersand-view');
-//todo: why is this undefined? debowerify seems to be working as expected
-// var typeahead = require('typeahead.js');
 module.exports = SearchView.extend({
 	initialize: function () {
+        this.dataSet = new Firebase('https://luminous-fire-5575.firebaseio.com/users');
+        // this.dataSet.on('value', _.bind(this.getMessages, this));
 	},
 
  	template: require('../../templates/search.hbs')(),
@@ -18,18 +22,39 @@ module.exports = SearchView.extend({
 	    	app.navigate('/map');
 	    	this.remove();
 	    });
-	    // this.initTypeahead();
+	
+		//todo: gross, fix this
+		this.dataSet.on('value', _.bind(function (ss) {
+			this.messages = [];
+			_.each(ss.val(), function (item) { 
+				_.each(item.messages, function (item2) {
+					this.messages.push(item2);
+				}, this);
+			}, this);
+			this.initTypeahead();
+		}, this));
 	},
 
 	initTypeahead: function () {
 		$('#search-input').typeahead('destroy');
-	var bloodhound = new Bloodhound({
-		datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.text); },
-		queryTokenizer: Bloodhound.tokenizers.whitespace, local: this.messages });
-	bloodhound.initialize();
-    var options = {	displayKey: 'text',	source: bloodhound.ttAdapter(),
-        	templates: { suggestion: _.template('<strong><%=text%></strong>')}};
-    $('#search-input').typeahead(null, options);
+		var bloodhound = new Bloodhound({
+			datumTokenizer: function(d) { 
+				return Bloodhound.tokenizers.whitespace(d.text); 
+			},
+			queryTokenizer: Bloodhound.tokenizers.whitespace, 
+			local: this.messages 
+		});
+		
+		bloodhound.initialize();
+	    var options = {	
+	    	displayKey: 'text',
+	    	source: bloodhound.ttAdapter(),
+	    	templates: { 
+	    		suggestion: _.template('<strong><%=text%></strong>')
+	    	}
+	    };
+
+	    $('#search-input').typeahead(null, options);
 	},
 
 	remove: function () {

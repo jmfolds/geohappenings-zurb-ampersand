@@ -15,7 +15,7 @@ cd geohappenings-zurb-ampersand
 
 npm install && bower install
 
-gulp serve --> starts dev server at localhost:8080 and watches for files changes to rebuild
+gulp serve --> builds and starts dev server at localhost:8080 and watches for files changes to rebuild
 
 ```
 
