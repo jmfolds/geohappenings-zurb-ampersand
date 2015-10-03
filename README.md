@@ -1,8 +1,5 @@
 # Geohappenings - Zurb Foundation with Ampersand.js
 
-TODO:
-* Get typeahead working with browserify
-
 ## Requirements
 
   * [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
@@ -18,8 +15,10 @@ cd geohappenings-zurb-ampersand
 
 npm install && bower install
 
-gulp build --> bundle/compile all the things **process currently hangs, need to fix
-
 gulp serve --> starts dev server at localhost:8080 and watches for files changes to rebuild
 
 ```
+
+###TODO:###
+  * Get typeahead working with browserify
+  * remove bower completely?
