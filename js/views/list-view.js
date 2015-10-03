@@ -1,7 +1,7 @@
 /* global app*/
 'use strict';
 var _ = require('lodash');
-var $ = require('jquery');
+var $ = require('jquery');//jshint ignore:line
 
 var Firebase = require('firebase');
 var AmpersandView = require('ampersand-view');
@@ -17,6 +17,10 @@ module.exports = AmpersandView.extend({
 
  	template: require('../../templates/list.hbs')(),
 
+	events: {
+		'click .chat-item': 'closeModal'
+	},
+
 	render: function () {
 	    this.renderWithTemplate();
 	    // open modal
@@ -27,7 +31,6 @@ module.exports = AmpersandView.extend({
 	    	this.remove();
 	    });
 	 	this.renderCollection(this.collection, ItemView, this.queryByHook('message-list'));
-
 	},
 
 	getMessages: function (dataSnapshot) {

@@ -16,6 +16,6 @@ module.exports = View.extend({
     },
     
     showOnMap: function () {
-        app.router.trigger('message:listClick', this.model.toJSON());
+        app.router.trigger('message:showOnMap', this.model.toJSON());
     }
 });

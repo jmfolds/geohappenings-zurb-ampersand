@@ -5,7 +5,7 @@ var MapModel = require('../models/map');
 
 module.exports = MapView.extend({
 	initialize: function () {
-        this.listenTo(app.router, 'message:listClick', this.onListSelect);
+        this.listenTo(app.router, 'message:showOnMap', this.onListSelect);
         this.listenTo(app.router, 'share:selectLocation', this.selectLocation);
 		this.model = new MapModel();
 	},

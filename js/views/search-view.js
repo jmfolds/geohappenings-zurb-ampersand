@@ -1,4 +1,4 @@
-/* global app*/
+/* global app, Bloodhound*/
 'use strict';
 var $ = require('jquery');
 var _ = require('lodash');
@@ -54,7 +54,10 @@ module.exports = SearchView.extend({
 	    	}
 	    };
 
-	    $('#search-input').typeahead(null, options);
+	    $('#search-input').typeahead(null, options).on('typeahead:select', _.bind(function (evt, model) {
+	        app.router.trigger('message:showOnMap', model);
+		    $(this.el).foundation('reveal', 'close');
+	    }, this));
 	},
 
 	remove: function () {
