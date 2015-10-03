@@ -1,4 +1,4 @@
-# Geohappenings - Zurb Foundation wih &.js
+# Geohappenings - Zurb Foundation with Ampersand.js
 
 TODO:
 * Get typeahead working with browserify
