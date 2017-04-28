@@ -20,7 +20,7 @@ var MapModel = AmpersandModel.extend({
         //set map default view
         this.map.setView(L.latLng([39.060800, -25.503862]), 3);
         //add basemap
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             minZoom: 2,
             maxZoom: 18,
             attribution: 'Map data © <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors'
